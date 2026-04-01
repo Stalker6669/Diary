@@ -1,4 +1,6 @@
 # Byte-compiled / optimized / DLL files
+Diary.db
+config.json
 __pycache__/
 *.py[codz]
 *$py.class
