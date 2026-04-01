@@ -1,6 +1,7 @@
 # 📓Console Diary 
 
 [RU] Это мой учебный фан-проект: консольный дневник с шифрованием и красивым интерфейсом. 
+
 [EN] This is my learning fan-project: a console-based diary with encryption and a stylized UI.
 
 ---
