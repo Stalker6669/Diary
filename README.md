@@ -19,11 +19,13 @@
 * Rich & Prompt Toolkit (UI/UX)
 
 ## Status / Статус
-**English version is coming soon!** Currently, the interface is in Russian, but localization is on the roadmap.
-*Интерфейс на русском языке, скоро добавлю поддержку английского.*
+[EN] **English version is coming soon!** Currently, the interface is in Russian, but localization is on the roadmap.
+
+[RU] *Интерфейс на русском языке, скоро добавлю поддержку английского.*
 
 ## 🤝 Contributing / Помощь проекту
 I'm a beginner, so feedback, Issue reports, and Pull Requests are very welcome! 
+
 *Я только учусь, поэтому буду рад любой критике и предложениям в разделе Issues.*
 
 ## 📄 License
