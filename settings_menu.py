@@ -25,7 +25,8 @@ def settings_menu(config):
                 save_config(config)
                 print("[green]Пользователь сброшен. При следующем входе нужно будет авторизоваться.[/]")
             elif choice == "3":
-                break
+                from main import main
+                main()
             else:
                 print("[red]Ошибка ! Повторите попытку[/]")
                 input("\nНажмите Enter, чтобы вернуться...")
