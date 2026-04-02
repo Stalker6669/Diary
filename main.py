@@ -17,68 +17,62 @@ console = Console()
 
 
 def main():
-    # Авто вход
-    os.system('cls')
-    config = load_config()
+    while True:
+        try:
+            os.system('cls')
+            config = load_config()
 
-    if config.get("saved_user_name"):
-        print("[red]Обнаружен сохраненный профиль.[/]")
-        entry = input("Войти под этим профилем ? (y/n): ").lower()
+            # Проверка сохранённого профиля
+            if config.get("saved_user_name"):
+                print("[red]Обнаружен сохраненный профиль.[/]")
+                entry = input("Войти под этим профилем ? (y/n): ").lower()
 
-        if entry == "y":
-            master_pass = getpass.getpass("Введите пароль: ")
+                if entry == "y":
+                    master_pass = getpass.getpass("Введите пароль: ")
+                    real_name = decrypt_name(config["saved_user_name"], master_pass)
 
-            real_name = decrypt_name(config["saved_user_name"], master_pass)
+                    if real_name:
+                        session = SessionLocal()
+                        user = session.query(User).filter_by(name=real_name).first()
+                        session.close()
+                        if user:
+                            menu(user, config)
+                            return  # Завершаем main после выхода из меню
 
-            if real_name:
-                session = SessionLocal()
-                user = session.query(User).filter_by(name=real_name).first()
-                session.close()
+                    print("[red]Ошибка ! Неверный пароль ![/]")
+                    input("\nНажмите Enter, чтобы войти через главное меню...")
+
+            # Если профиля нет, или было выбрано n
+            os.system('cls')
+            console.print("--- Консольный дневник ---", justify="center")
+            print("1. Войти")
+            print("2. Зарегистрироваться")
+            print("3. Выйти")
+            print("4. Настройки")
+            question = input("\n>>> ")
+
+            if question == "1":
+                user, raw_password = login_user()
                 if user:
+                    # После успешного входа спрашиваем: сохранить?
+                    save_me = input("Запомнить вас на этом устройстве ? (y/n): ").lower()
+                    if save_me == "y":
+                        config["saved_user_name"] = encrypt_name(user.name, raw_password)
+                        save_config(config)
                     menu(user, config)
-                    return  # Завершаем main после выхода из меню
+            elif question == "2":
+                add_user()
+            elif question == "3":
+                os.system('cls')
+                sys.exit()
+            elif question == "4":
+                settings_menu(config)
             else:
-                print("[red]Ошибка ! Неверный пароль ![/]")
+                print("[red]Ошибка ! Повторите попытку ![/]")
                 input("\nНажмите Enter, чтобы вернуться...")
                 return
-        elif entry == "n":
-            # Основной вход
-            while True:
-                try:
-                    os.system('cls')
-                    console.print("--- Консольный дневник ---", justify="center")
-                    print("1. Войти")
-                    print("2. Зарегистрироваться")
-                    print("3. Выйти")
-                    print("4. Настройки")
-                    question = input("\n>>> ")
-
-                    if question == "1":
-                        user, raw_password = login_user()
-                        if user:
-                            # После успешного входа спрашиваем: сохранить?
-                            save_me = input("Запомнить вас на этом устройстве ? (y/n): ").lower()
-                            if save_me == "y":
-                                config["saved_user_name"] = encrypt_name(user.name, raw_password)
-                                save_config(config)
-                            menu(user, config)
-                    elif question == "2":
-                        add_user()
-                    elif question == "3":
-                        os.system('cls')
-                        sys.exit()
-                    elif question == "4":
-                        settings_menu(config)
-                    else:
-                        print("[red]Ошибка ! Повторите попытку ![/]")
-                        input("\nНажмите Enter, чтобы вернуться...")
-                        return
-                except KeyboardInterrupt:
-                    pass
-        else:
-            print("\n[red]Ошибка ! Повторите попытку ![/]")
-            input("Нажмите Enter, чтобы вернуться...")
-            main()
+        except KeyboardInterrupt:
+            pass
 
 
 if __name__ == '__main__':
