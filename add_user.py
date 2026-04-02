@@ -24,6 +24,7 @@ def add_user():
             session.add(new_user)
             session.commit()
             print("[green]Регистрация успешна ! Теперь Войдите в систему.[/]")
+            input("Для этого нажмите Enter...")
         except Exception as e:
             session.rollback()
             print(f"[red]Ошибка: {e}[/]")
