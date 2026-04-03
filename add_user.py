@@ -12,7 +12,7 @@ def add_user():
         password_user = getpass.getpass("Введите пароль: ")
 
         if len(password_user) < 5:
-            print("[red]Error ! Пароль маленький ! Повторите попытку ![/]")
+            print("[red]Ошибка ! Пароль маленький ! Повторите попытку ![/]")
             input("\nНажмите Enter, чтобы вернуться...")
             return
 

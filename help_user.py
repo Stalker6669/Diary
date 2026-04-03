@@ -10,6 +10,6 @@ def help_user():
     print("\n[yellow]2. Команды:[/]")
     print("\t[#bf25f7]ID записи[/] - читать запись")
     print("\t[blue]update[/] - обновление записи")
-    print("\t[red]deleted[/] - удаление записи")
+    print("\t[red]delete[/] - удаление записи")
     print("\t[cyan]export[/] - экспорт записи в .txt")
     input("\nНажмите Enter для возврата...")

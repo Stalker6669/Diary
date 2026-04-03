@@ -17,7 +17,7 @@ def login_user():
         session.close()
 
         if user and check_password_hash(user.password, password_user):
-            print("[green]Вы успешно вошли[/]")
+            print("[green]Вы успешно вошли ![/]")
             return user, password_user
         else:
             print("[red]Ошибка ! Такого аккаунта нет ![/]")

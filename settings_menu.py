@@ -19,7 +19,7 @@ def settings_menu(config):
             if choice == "1":
                 config["view_mode"] = 2 if config["view_mode"] == 1 else 1
                 save_config(config)
-                print("[green]Настройка изменена![/]")
+                print("[green]Настройка изменена ![/]")
             elif choice == "2":
                 config["saved_user_name"] = None
                 save_config(config)
@@ -28,7 +28,7 @@ def settings_menu(config):
                 from main import main
                 main()
             else:
-                print("[red]Ошибка ! Повторите попытку[/]")
+                print("[red]Ошибка ! Повторите попытку.[/]")
                 input("\nНажмите Enter, чтобы вернуться...")
                 return
         except KeyboardInterrupt:
